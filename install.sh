@@ -1,6 +1,7 @@
 echo 'Start Installation'
 date
 
+composer i
 cp .env.example .env
 php artisan key:generate
 php artisan migrate --force

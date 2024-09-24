@@ -9,12 +9,17 @@ use Session;
 
 class AuthController extends Controller
 {
-    public function promptLogin()
+    public function index()
     {
-        return view('login');
+        return view('auth.login');
     }
 
-    public function actionLogin(Request $request)
+    public function indexAdmin()
+    {
+        return view('auth.login-admin');
+    }
+
+    public function login(Request $request)
     {
         $data = $request->all();
         
@@ -39,7 +44,7 @@ class AuthController extends Controller
 
                 Session::put($sessionData);
                 if (Session::get('group') === 1) {
-                    return redirect()->to(route('dashboard'))->withErrors(['msg' => 'Success', 'success' => "Selamat datang $user->nama"]);
+                    return redirect()->to(route('admin.dashboard'))->withErrors(['msg' => 'Success', 'success' => "Selamat datang $user->nama"]);
                 } else {
                     return redirect()->to(route('beranda'))->withErrors(['msg' => 'Success', 'success' => "Selamat datang $user->nama"]);
                 }
@@ -51,7 +56,7 @@ class AuthController extends Controller
         }
     }
 
-    public function actionLogout()
+    public function logout()
     {
         Session::flush();
         return redirect()->to('/');
