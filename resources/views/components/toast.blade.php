@@ -1,0 +1,1 @@
+<div class="alert alert-{{ $type }} position-absolute" style="z-index: 9999; top: .5rem; right: .5rem; cursor: pointer;" onclick="this.remove()">{{ $message }}</div>

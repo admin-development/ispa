@@ -45,6 +45,11 @@
                         @if (\Session::get('login'))
                         <li class="dropdown"><a href="#"><span>{{ \Session::get('nama') }}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
+                                @if (\Session::get('group') == 1)
+                                <li>
+                                    <a href="{{ route('dashboard') }}">Dashboard</a>
+                                </li>
+                                @endif
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST" id="outForm">
                                         @csrf
@@ -292,6 +297,10 @@
         </div>
     </footer>
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    @error('error')
+        <x-toast type="danger" :message="$message"></x-toast>
+    @enderror
+        
     <div id="preloader"></div>
     <script src="{{ asset('assets/backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/assets/vendor/php-email-form/validate.js') }}"></script>

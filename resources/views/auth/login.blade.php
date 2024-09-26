@@ -32,9 +32,6 @@
     <div class="card">
         <div class="card-body">
             <h2 class="text-center">Login</h2>
-            @if ($errors->any())
-            <div class="alert alert-danger">@error('error') {{ $message }} @enderror</div>
-            @endif
             <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="form-group mb-3">
@@ -49,6 +46,9 @@
             </form>
         </div>
     </div>
+    @error('error')
+        <x-toast type="danger" :message="$message"></x-toast>
+    @enderror
     <script src="{{ asset('assets/backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('assets/frontend/assets/vendor/aos/aos.js') }}"></script>
