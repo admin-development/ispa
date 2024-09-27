@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="{{ asset('assets/backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <style>
-        .bg-gradient-secondary {
+        .bg-gradient-primary {
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body class="bg-gradient-secondary">
+<body class="bg-gradient-primary">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-5 col-md-9 col-sm-12">
@@ -37,7 +37,7 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
                                         </div>
-                                        <button type="submit" class="btn btn-secondary btn-user btn-block">Login</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                     </form>
                                 </div>
                             </div>

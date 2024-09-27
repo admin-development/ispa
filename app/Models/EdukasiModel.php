@@ -12,7 +12,7 @@ class EdukasiModel extends Model
 
     protected $table      = 'edukasi';
     protected $primaryKey = 'id';
-    protected $fillable   = ['judul','gambar','deskripsi'];
+    protected $fillable   = ['judul','image','deskripsi'];
 
     public function getData($id = null)
     {
@@ -27,8 +27,8 @@ class EdukasiModel extends Model
     {
         $saveData = $this->firstOrNew(['id' =>  $id]);
         $saveData->judul     = $data['judul'];
-        if (isset($data['gambar'])) {
-            $saveData->gambar    = $data['gambar'];
+        if (isset($data['image'])) {
+            $saveData->image    = $data['image'];
         }
         $saveData->deskripsi = $data['deskripsi'];
         $saveData->save();
@@ -43,6 +43,6 @@ class EdukasiModel extends Model
 
     public function getGambarbyId($id)
     {
-        return $this->select('gambar')->find($id);
+        return $this->select('image')->find($id);
     }
 }

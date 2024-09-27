@@ -24,7 +24,7 @@ class isLogin
             return redirect()->to(route($goTo));
         }
         else if (!\Session::get('login')) {
-            if (!in_array('login', $segment) && !in_array('beranda', $segment) && !in_array('admin', $segment) && count($segment) != 0) {
+            if (!in_array('login', $segment) && !in_array('beranda', $segment) && count($segment) != 0) {
                 return redirect()->to(route('login'))->withErrors('error', 'Silakan login terlebih dahulu');
             }
         }

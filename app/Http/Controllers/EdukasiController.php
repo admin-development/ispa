@@ -30,13 +30,13 @@ class EdukasiController extends Controller
         };
         
         $data = $request->all();
-        $file = $request->file('gambar');
-        if (!empty($data['gambar']) or !empty($file['gambar'])) {
+        $file = $request->file('image');
+        if (!empty($data['image']) or !empty($file['image'])) {
             $fileName = $file->hashName();
-            $file->move('img', $fileName);
-            $data['gambar'] = $fileName;
+            $file->move('images', $fileName);
+            $data['image'] = $fileName;
         } else {
-            $data['gambar'] = 'no-image.png';
+            $data['image'] = 'no-image.png';
         }
         $save = $this->edukasi->insertOrUpdate($data);
         if (!empty($save)) {
@@ -71,18 +71,18 @@ class EdukasiController extends Controller
         };
         
         $data = $request->all();
-        $file = $request->file('gambar');
-        if (isset($data['gambar']) and (!empty($data['gambar']) or !empty($file['gambar']))) {
+        $file = $request->file('image');
+        if (isset($data['image']) and (!empty($data['image']) or !empty($file['image']))) {
             $oldFile = $this->edukasi->getGambarbyId($id);
-            if (!empty($oldFile) and $oldFile->gambar != "no-image.png") {
-                $imgPath = 'img/' . $oldFile->gambar;
+            if (!empty($oldFile) and $oldFile->image != "no-image.png") {
+                $imgPath = 'images/' . $oldFile->image;
                 if(\File::exists($imgPath)) {
                     \File::delete($imgPath);
                 }
             }
             $fileName = $file->hashName();
-            $file->move('img', $fileName);
-            $data['gambar'] = $fileName;
+            $file->move('images', $fileName);
+            $data['image'] = $fileName;
         }
         $save = $this->edukasi->insertOrUpdate($data, $id);
         if (!empty($save)) {
@@ -95,8 +95,8 @@ class EdukasiController extends Controller
     public function destroy($id)
     {
         $oldFile = $this->edukasi->getGambarbyId($id);
-        if (!empty($oldFile) and $oldFile->gambar != "no-image.png") {
-            $imgPath = 'img/' . $oldFile->gambar;
+        if (!empty($oldFile) and $oldFile->image != "no-image.png") {
+            $imgPath = 'images/' . $oldFile->image;
             if(\File::exists($imgPath)) {
                 \File::delete($imgPath);
             }

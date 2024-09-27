@@ -24,15 +24,15 @@ class UserController extends Controller
         ], [
             'nama' => 'Nama user tidak boleh kosong'
         ])) {
-            return redirect()->to(route('user.create'));
+            return redirect()->to(route('pengguna.create'));
         };
         
         $data = $request->all();
         $save = $this->user->insertOrUpdate($data);
         if (!empty($save)) {
-            return redirect()->to(route('user.index'))->withErrors(['msg' => 'Success', 'success' => 'Data berhasil ditambahkan']);
+            return redirect()->to(route('pengguna.index'))->withErrors(['msg' => 'Success', 'success' => 'Data berhasil ditambahkan']);
         } else {
-            return redirect()->to(route('user.index'))->withErrors(['msg' => 'Error', 'error' => 'Data gagal ditambahkan']);
+            return redirect()->to(route('pengguna.index'))->withErrors(['msg' => 'Error', 'error' => 'Data gagal ditambahkan']);
         }
     }
 
@@ -49,15 +49,15 @@ class UserController extends Controller
         ], [
             'nama' => 'Nama user tidak boleh kosong'
         ])) {
-            return redirect()->to(route('user.edit', $id));
+            return redirect()->to(route('pengguna.edit', $id));
         };
         
         $data = $request->all();
         $save = $this->user->insertOrUpdate($data, $id);
         if (!empty($save)) {
-            return redirect()->to(route('user.index'))->withErrors(['msg' => 'Success', 'success' => 'Data berhasil diubah']);
+            return redirect()->to(route('pengguna.index'))->withErrors(['msg' => 'Success', 'success' => 'Data berhasil diubah']);
         } else {
-            return redirect()->to(route('user.index'))->withErrors(['msg' => 'Error', 'error' => 'Data gagal diubah']);
+            return redirect()->to(route('pengguna.index'))->withErrors(['msg' => 'Error', 'error' => 'Data gagal diubah']);
         }
     }
 
