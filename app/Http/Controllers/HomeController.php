@@ -6,12 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class HomeController extends Controller
-{
-    public function index()
-    {
-        return view('template.app');
-    }
-    
+{   
     public function diagnosa()
     {
         $user    = $this->user->getDatabyUsername(\Session::get('username'));
@@ -59,41 +54,6 @@ class HomeController extends Controller
                 $this->hasil->insertOrUpdate($insertData);
             }
         }
-
-        // $user    = $this->user->getDatabyUsername(\Session::get('username'));
-        // $tgl     = Carbon::today()->toDateString();
-        // $id_user = $user->id;
-        // $gejala  = $this->hasil->getDatabyTglandUserId($tgl, $id_user);
-        // $data    = $gejala->groupBy(['id_user', 'tanggal', 'id_penyakit']);
-        // $hd      = $this->hasilDiagnosa($data);
-        // $sakitId = $hd[0]['id_penyakit'];
-        // $gCount  = 0;
-
-        // if (count($gejala) > 7) {
-        //     foreach ($gejala as $value) {
-        //         $this->hasil->deleteData($value['id']);
-        //     }
-        //     $message = 'Tidak ada diagnosa yang sesuai, silakan coba lagi!';
-        //     return view('frontend.error', compact('message'));
-        // }
-
-        // foreach ($gejala as $value) {
-        //     if ($value['id_penyakit'] != $sakitId) {
-        //         $this->hasil->deleteData($value['id']);
-        //     } else {
-        //         $gCount += 1;
-        //     }
-        // }
-
-        // if (($sakitId == 1 && $gCount != 4) || ($sakitId == 2 && $gCount != 7) || ($sakitId == 3 && $gCount != 6) || ($sakitId == 4 && $gCount != 7) || ($sakitId == 5 && $gCount != 7)) {
-        //     foreach ($gejala as $value) {
-        //         if ($value['id_penyakit'] == $sakitId) {
-        //             $this->hasil->deleteData($value['id']);
-        //         }
-        //     }
-        //     $message = 'Tidak ada diagnosa yang sesuai, silakan coba lagi!';
-        //     return view('frontend.error', compact('message'));
-        // }
 
         return redirect()->to(route('diagnosa'));
     }

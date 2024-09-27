@@ -8,37 +8,67 @@
     <link href="{{ asset('assets/backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="{{ asset('assets/backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/backend/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <style>
-        
+        .badge {
+            padding: .5rem;
+        }
+        table tr th:last-child {
+            width: 17.5%;
+        }
     </style>
     @yield('css')
 </head>
 <body id="page-top">
     <div id="wrapper">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-hospital"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">ISPA</div>
             </a>
             <hr class="sidebar-divider my-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+            <li class="nav-item {{ \Request::segment(2) == 'dashboard' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span>
+                </a>
             </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">Main Menu</div>
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+            <li class="nav-item {{ \Request::segment(2) == 'penyakit' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('penyakit.index') }}">
+                    <i class="fas fa-fw fa-database"></i><span>Data Penyakit</span>
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+            <li class="nav-item {{ in_array(\Request::segment(2), ['gejala', 'nilai-cf']) ? 'active' : '' }}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManagement"
+                    aria-expanded="true" aria-controls="collapseManagement">
+                    <i class="fas fa-fw fa-database"></i>
+                    <span>Data Management</span>
+                </a>
+                <div id="collapseManagement" class="collapse" aria-labelledby="headingManagement"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('gejala.index') }}">Gejala</a>
+                        <a class="collapse-item" href="{{ route('nilai-cf.index') }}">Nilai CF</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item {{ \Request::segment(2) == 'edukasi' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('edukasi.index') }}">
+                    <i class="fas fa-fw fa-graduation-cap"></i><span>Edukasi</span>
+                </a>
+            </li>
+            <li class="nav-item {{ \Request::segment(2) == 'riwayat-diagnosa' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('riwayat-diagnosa.index') }}">
+                    <i class="fas fa-fw fa-history"></i><span>Riwayat Diagnosa</span>
+                </a>
+            </li>
+            <li class="nav-item {{ \Request::segment(2) == 'pengguna' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('pengguna.index') }}">
+                    <i class="fas fa-fw fa-database"></i><span>Data Pengguna</span>
+                </a>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
             <div class="text-center d-none d-md-inline">
@@ -66,6 +96,7 @@
                         </li>
                     </ul>
                 </nav>
+                @if (\Request::segment(2) == 'dashboard')
                 <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -77,11 +108,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                Gejala</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data['gejala'] }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -93,11 +121,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                Penyakit</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data['penyakit'] }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -108,23 +133,9 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Pengguna</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data['user'] }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -136,11 +147,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                                Edukasi</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data['edukasi'] }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -150,9 +158,8 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12">
                             <div class="card shadow mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Riwayat Diagnosa (Hari ini)</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -160,17 +167,34 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                             aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <a class="dropdown-item" href="{{ route('riwayat-diagnosa.index') }}">Selengkapnya</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                    <div class="table-responsive">
+                                        <table class="table text-start align-middle table-bordered table-hover mb-0" id="dataTable">
+                                            <thead>
+                                                <tr class="text-dark">
+                                                    <th width="5%">No</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Nama</th>
+                                                    <th>Penyakit</th>
+                                                    <th>Hasil</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($data['hasil'] as $key => $value)
+                                                <tr>
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $value['tanggal'] }}</td>
+                                                    <td>{{ $value['nama_user'] }}</td>
+                                                    <td>{{ $value['nama_penyakit'] }}</td>
+                                                    <td>{{ $value['hasil_nilai'] }}</td>    
+                                                </tr>    
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -178,6 +202,22 @@
                     </div>
                 </div>
             </div>
+            @else
+            <div class="container-fluid">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <?php
+                        $arrTitle = explode('-', ucfirst(\Request::segment(2)));
+                        $title = $arrTitle[0];
+                        if (isset($arrTitle[1])) {
+                            $arrTitle[1] = ucfirst($arrTitle[1]);
+                            $title .= " $arrTitle[1]";
+                        }
+                    ?>
+                    <h1 class="h3 mb-0 text-gray-800">{{ $title }}</h1>
+                </div>
+                @yield('content')
+            </div>
+            @endif
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -194,6 +234,9 @@
     <script src="{{ asset('assets/backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/backend/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/backend/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/demo/datatables-demo.js') }}"></script>
     <script src="{{ asset('assets/backend/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('assets/backend/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets/backend/js/demo/chart-pie-demo.js') }}"></script>

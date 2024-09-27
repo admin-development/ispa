@@ -21,12 +21,14 @@
         <div class="topbar d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
                 <div class="contact-info d-flex align-items-center">
-                    <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-                    <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+                    <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">support@ispa.com</a></i>
+                    <i class="bi bi-phone d-flex align-items-center ms-4"><span>+62 812 1234 4321</span></i>
                 </div>
+                @if (!\Session::get('login'))
                 <div class="social-links d-none d-md-flex align-items-center">
                     <a href="#">Guest</a>
                 </div>
+                @endif
             </div>
         </div>
         <div class="branding d-flex align-items-cente">
@@ -37,10 +39,10 @@
                 </a>
                 <nav id="navmenu" class="navmenu">
                     <ul>
-                        <li><a href="#hero" class="active">Beranda<br></a></li>
-                        <li><a href="#">Diagnosa</a></li>
-                        <li><a href="#recent-posts">Edukasi</a></li>
-                        <li><a href="#">Riwayat Diagnosa</a></li>
+                        <li><a href="#beranda" class="active">Beranda<br></a></li>
+                        <li><a href="{{ route('diagnosa') }}">Diagnosa</a></li>
+                        <li><a href="#edukasi">Edukasi</a></li>
+                        <li><a href="{{ route('riwayat') }}">Riwayat</a></li>
                         <li><a href="#about">About</a></li>
                         @if (\Session::get('login'))
                         <li class="dropdown"><a href="#"><span>{{ \Session::get('nama') }}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -68,12 +70,12 @@
         </div>
     </header>
     <main class="main">
-    <section id="hero" class="hero section accent-background">
+    <section id="beranda" class="hero section accent-background">
         <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-5 justify-content-between">
                 <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
                 <h2><span>Welcome to </span><span class="accent">ISPA</span></h2>
-                <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+                <p>Selamat datang di website ISPA! Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik bagi Anda. Kesehatan Anda adalah prioritas kami!</p>
                 <div class="d-flex">
                     <a href="#about" class="btn-get-started">Get Started</a>
                 </div>
@@ -90,7 +92,6 @@
     <section id="about" class="about section">
         <div class="container section-title" data-aos="fade-up">
         <h2>About Us<br></h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
         </div>
         <div class="container">
         <div class="row gy-4">
@@ -124,80 +125,9 @@
         </div>
         </div>
     </section>
-    <section id="services" class="services section">
+    <section id="edukasi" class="recent-posts section">
         <div class="container section-title" data-aos="fade-up">
-        <h2>Our Services</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-        </div>
-        <div class="container">
-        <div class="row gy-4">
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item  position-relative">
-                <div class="icon">
-                <i class="bi bi-activity"></i>
-                </div>
-                <h3>Nesciunt Mete</h3>
-                <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-                <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-            </div>
-            </div>
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative">
-                <div class="icon">
-                <i class="bi bi-broadcast"></i>
-                </div>
-                <h3>Eosle Commodi</h3>
-                <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-                <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-            </div>
-            </div>
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-                <div class="icon">
-                <i class="bi bi-easel"></i>
-                </div>
-                <h3>Ledo Markt</h3>
-                <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-                <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-            </div>
-            </div>
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-                <div class="icon">
-                <i class="bi bi-bounding-box-circles"></i>
-                </div>
-                <h3>Asperiores Commodit</h3>
-                <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-                <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-            </div>
-            </div>
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item position-relative">
-                <div class="icon">
-                <i class="bi bi-calendar4-week"></i>
-                </div>
-                <h3>Velit Doloremque</h3>
-                <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-                <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-            </div>
-            </div>
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item position-relative">
-                <div class="icon">
-                <i class="bi bi-chat-square-text"></i>
-                </div>
-                <h3>Dolori Architecto</h3>
-                <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-                <a href="service-details.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
-            </div>
-            </div>
-        </div>
-        </div>
-    </section>
-    <section id="recent-posts" class="recent-posts section">
-        <div class="container section-title" data-aos="fade-up">
-        <h2>Recent Blog Posts</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Edukasi</h2>
         </div>
         <div class="container">
         <div class="row gy-4">
@@ -272,15 +202,24 @@
                     <a href="index.html" class="logo d-flex align-items-center">
                     <span class="sitename">ISPA</span>
                     </a>
+                    <p>Selamat datang di website ISPA! Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik bagi Anda. Kesehatan Anda adalah prioritas kami!</p>
+                    <p class="mb-0 pb-0">
+                        <strong>Phone:</strong>
+                        <span>+62 812 1234 4321</span>
+                    </p>
+                    <p>
+                        <strong>Email:</strong>
+                        <span>support@ispa.com</span>
+                    </p>
                 </div>
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                    <li><a href="#">Beranda</a></li>
-                    <li><a href="#">Diagnosa</a></li>
-                    <li><a href="#">Edukasi</a></li>
-                    <li><a href="#">Riwayat Diagnosa</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="#beranda">Beranda</a></li>
+                    <li><a href="{{ route('diagnosa') }}">Diagnosa</a></li>
+                    <li><a href="#edukasi">Edukasi</a></li>
+                    <li><a href="{{ route('riwayat') }}">Riwayat</a></li>
+                    <li><a href="#about">About</a></li>
                     </ul>
                 </div>
             </div>

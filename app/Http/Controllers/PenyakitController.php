@@ -14,7 +14,7 @@ class PenyakitController extends Controller
 
     public function create()
     {
-        $data = 'P' . (int)substr($this->penyakit->getLast()->kode_penyakit, 1) + 1;
+        $data = 'D' . (int)substr($this->penyakit->getLast()->kode_penyakit, 1) + 1;
         return view('penyakit.create', compact('data'));
     }
 
