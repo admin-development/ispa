@@ -86,7 +86,7 @@
                                 <img class="img-profile rounded-circle" src="https://ui-avatars.com/api/?name={{ session()->get('nama') }}&background={{ session()->get('color') }}">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                                <a class="dropdown-item" href="{{ route('beranda') }}"><i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>Beranda</a>
+                                <a class="dropdown-item" href="{{ route('app') }}"><i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>Beranda</a>
                                 <div class="dropdown-divider"></div>
                                 <form action="{{ route('logout') }}" method="POST" id="uForm">
                                     @csrf
@@ -188,7 +188,7 @@
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value['tanggal'] }}</td>
-                                                    <td>{{ $value['nama_user'] }}</td>
+                                                    <td>{{ $value['nama'] }}</td>
                                                     <td>{{ $value['nama_penyakit'] }}</td>
                                                     <td>{{ $value['hasil_nilai'] }}</td>    
                                                 </tr>    

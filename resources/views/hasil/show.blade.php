@@ -30,7 +30,7 @@
                     @foreach ($data['gejala'] as $key => $value)
                         <tr>
                             <td class="text-center" width="5%">{{ $key + 1 }}</td>
-                            <td>{{ $value->gejala->nama_gejala }}</td>
+                            <td>{{ $value->nilai_cf->gejala->nama_gejala }}</td>
                         </tr>
                     @endforeach
                 </tbody>

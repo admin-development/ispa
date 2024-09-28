@@ -49,7 +49,7 @@ class AuthController extends Controller
                     'login'    => true
                 ];
                 session($sessionData);
-                $goTo = 'beranda';
+                $goTo = 'app';
                 if ($segment == 'admin') {
                     $goTo = 'dashboard';
                 }

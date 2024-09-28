@@ -17,7 +17,7 @@ class isLogin
     {
         $segment = $request->segments();
         if (\Session::get('login') && in_array('login', $segment)) {
-            $goTo = 'beranda';
+            $goTo = 'app';
             if (\Session::get('group') == 1) {
                 $goTo = 'dashboard';
             }

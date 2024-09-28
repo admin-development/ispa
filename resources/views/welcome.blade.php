@@ -7,7 +7,7 @@
     <link href="{{ asset('assets/frontend/assets/img/favicon.png') }}" rel="icon">
     <link href="{{ asset('assets/frontend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
     <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="{{ asset('assets/frontend/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/frontend/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
@@ -15,13 +15,23 @@
     <link href="{{ asset('assets/frontend/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/frontend/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/frontend/assets/css/main.css') }}" rel="stylesheet">
+    <style>
+        .post-img img {
+            width: 100%;
+            height: 275px;
+        }
+        .badge {
+            padding: .5rem;
+        }
+    </style>
+    @yield('css')
 </head>
 <body>
     <header id="header" class="header fixed-top">
         <div class="topbar d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
                 <div class="contact-info d-flex align-items-center">
-                    <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">support@ispa.com</a></i>
+                    <i class="bi bi-envelope d-flex align-items-center"><a href="#">support@ispa.com</a></i>
                     <i class="bi bi-phone d-flex align-items-center ms-4"><span>+62 812 1234 4321</span></i>
                 </div>
                 @if (!\Session::get('login'))
@@ -33,17 +43,17 @@
         </div>
         <div class="branding d-flex align-items-cente">
             <div class="container position-relative d-flex align-items-center justify-content-between">
-                <a href="index.html" class="logo d-flex align-items-center">
+                <a href="{{ route('app') }}" class="logo d-flex align-items-center">
                     <h1 class="sitename">ISPA</h1>
                     <span>.</span>
                 </a>
                 <nav id="navmenu" class="navmenu">
                     <ul>
-                        <li><a href="#beranda" class="active">Beranda<br></a></li>
+                        <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #beranda @else {{ route('app') }} @endif" class="active">Beranda<br></a></li>
                         <li><a href="{{ route('diagnosa') }}">Diagnosa</a></li>
-                        <li><a href="#edukasi">Edukasi</a></li>
+                        <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #edukasi @else {{ route('app') }} @endif">Edukasi</a></li>
                         <li><a href="{{ route('riwayat') }}">Riwayat</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #about @else {{ route('app') }} @endif">About</a></li>
                         @if (\Session::get('login'))
                         <li class="dropdown"><a href="#"><span>{{ \Session::get('nama') }}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
@@ -70,136 +80,95 @@
         </div>
     </header>
     <main class="main">
-    <section id="beranda" class="hero section accent-background">
-        <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-            <div class="row gy-5 justify-content-between">
-                <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                <h2><span>Welcome to </span><span class="accent">ISPA</span></h2>
-                <p>Selamat datang di website ISPA! Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik bagi Anda. Kesehatan Anda adalah prioritas kami!</p>
-                <div class="d-flex">
-                    <a href="#about" class="btn-get-started">Get Started</a>
-                </div>
-                </div>
-                <div class="col-lg-5 order-1 order-lg-2">
-                <img src="assets/img/hero-img.svg" class="img-fluid" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
-            <div class="container position-relative mt-5"></div>
-        </div>
-    </section>
-    <section id="about" class="about section">
-        <div class="container section-title" data-aos="fade-up">
-        <h2>About Us<br></h2>
-        </div>
-        <div class="container">
-        <div class="row gy-4">
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h3>Voluptatem dignissimos provident laboris nisi ut aliquip ex ea commodo</h3>
-            <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="">
-            <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
-            <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
-            </div>
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
-            <div class="content ps-0 ps-lg-5">
-                <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua.
-                </p>
-                <ul>
-                <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                <li><i class="bi bi-check-circle-fill"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-                </ul>
-                <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-                </p>
-                <div class="position-relative mt-4">
-                <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt="">
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox pulsating-play-btn"></a>
+        @if (\Request::segment(1) == 'beranda' || !\Request::segment(1))
+        <section id="beranda" class="hero section accent-background">
+            <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+                <div class="row gy-5 justify-content-between">
+                    <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                        <h2><span>Welcome to </span><span class="accent">ISPA</span></h2>
+                        <p>Selamat datang di website ISPA! Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik bagi Anda. Kesehatan Anda adalah prioritas kami!</p>
+                        <div class="d-flex">
+                            <a href="{{ route('diagnosa') }}" class="btn-get-started">Get Started</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 order-1 order-lg-2">
+                        <img src="{{ asset('assets/frontend/assets/img/hero-img.svg') }}" class="img-fluid" alt="">
+                    </div>
                 </div>
             </div>
+            <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+                <div class="container position-relative mt-5"></div>
             </div>
-        </div>
-        </div>
-    </section>
-    <section id="edukasi" class="recent-posts section">
-        <div class="container section-title" data-aos="fade-up">
-        <h2>Edukasi</h2>
-        </div>
-        <div class="container">
-        <div class="row gy-4">
-            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <article>
-                <div class="post-img">
-                <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
-                </div>
-                <p class="post-category">Politics</p>
-                <h2 class="title">
-                <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
-                </h2>
-                <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                    <p class="post-author">Maria Doe</p>
-                    <p class="post-date">
-                    <time datetime="2022-01-01">Jan 1, 2022</time>
-                    </p>
-                </div>
-                </div>
-            </article>
+        </section>
+        <section id="edukasi" class="recent-posts section">
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Edukasi</h2>
             </div>
-            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <article>
-                <div class="post-img">
-                <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+            <div class="container">
+                <div class="row gy-4">
+                    @foreach ($articles as $article)
+                    @if ($i === 3)
+                        @php
+                            $i = 0;
+                            $delay = 0;
+                        @endphp
+                    @endif
+                    @php
+                        $i++;
+                        $delay += 100;
+                    @endphp
+                    <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $delay }}">
+                        <article>
+                            <div class="post-img">
+                                <img src="{{ asset('images') . '/' . $article->image }}" alt="{{ $article->image }}" class="img-fluid">
+                            </div>
+                            <h2 class="title">
+                                <a href="{{ route('edukasi', $article->id) }}">{{ $article->judul }}</a>
+                            </h2>
+                        </article>
+                    </div>
+                    @endforeach
                 </div>
-                <p class="post-category">Sports</p>
-                <h2 class="title">
-                <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-                </h2>
-                <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-2.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                    <p class="post-author">Allisa Mayer</p>
-                    <p class="post-date">
-                    <time datetime="2022-01-01">Jun 5, 2022</time>
-                    </p>
-                </div>
-                </div>
-            </article>
             </div>
-            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <article>
-                <div class="post-img">
-                <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
-                </div>
-                <p class="post-category">Entertainment</p>
-                <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-                </h2>
-                <div class="d-flex align-items-center">
-                <img src="assets/img/blog/blog-author-3.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                    <p class="post-author">Mark Dower</p>
-                    <p class="post-date">
-                    <time datetime="2022-01-01">Jun 22, 2022</time>
-                    </p>
-                </div>
-                </div>
-            </article>
+        </section>
+        <section id="about" class="about section">
+            <div class="container section-title" data-aos="fade-up">
+                <h2>About Us<br></h2>
             </div>
-        </div>
-        </div>
-    </section>
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Pengertian Rancang Bangun sistem</h3>
+                        <p>Rancang bangun sistem merupakan Rancang bangun sistem adalah suatu proses yang melibatkan perencanaan, pengembangan, dan penerapan sebuah sistem secara keseluruhan, mulai dari identifikasi kebutuhan hingga implementasi.</p>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Pengertian Sistem Pakar</h3>
+                        <p>Sistem pakar ialah sebuah program komputer yang dirancang untuk meniru kemampuan pengambilan keputusan seorang ahli dalam bidang tertentu.</p>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Metode <i>Centainty Factor</i></h3>
+                        <p>Metode certainty factor ialah salah satu konsep yang dimana dalam hal untuk akomodasi ketidak pastian terhadap suatu argumentasi ataupun pikiran dari seorang ahli, sebagai analoginya adalah ketika seorang ahli yang setiap saat melakukkan analisa informasi yang dengan ungkapan kepada ketidakpastian maka digunakan metode ini.</p>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Pengertian ISPA</h3>
+                        <p>Penyakit ISPA adalah kondisi medis yang disebabkan oleh infeksi pada saluran pernapasan, meliputi hidung, tenggorokan, bronkus, hingga paru-paru. ISPA dapat disebabkan oleh berbagai jenis mikroorganisme seperti virus, bakteri, atau jamur.</p>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Pengertian Website</h3>
+                        <p>Website ialah suatu kumpulan tampilan web yang terintegrasi dan saling terhubung, membentuk akses portal dengan dashboard sebagai tampilan awal dan web page sebagai tampilan per halaman independent, pengguna dapat mengaksesnya melalui alamat atau link tertentu.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @else
+        @yield('content')
+        @endif
     </main>
     <footer id="footer" class="footer accent-background">
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-about">
-                    <a href="index.html" class="logo d-flex align-items-center">
+                    <a href="{{ route('app') }}" class="logo d-flex align-items-center">
                     <span class="sitename">ISPA</span>
                     </a>
                     <p>Selamat datang di website ISPA! Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik bagi Anda. Kesehatan Anda adalah prioritas kami!</p>
@@ -215,11 +184,11 @@
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                    <li><a href="#beranda">Beranda</a></li>
+                    <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #beranda @else {{ route('app') }} @endif">Beranda</a></li>
                     <li><a href="{{ route('diagnosa') }}">Diagnosa</a></li>
-                    <li><a href="#edukasi">Edukasi</a></li>
+                    <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #edukasi @else {{ route('app') }} @endif">Edukasi</a></li>
                     <li><a href="{{ route('riwayat') }}">Riwayat</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #about @else {{ route('app') }} @endif">About</a></li>
                     </ul>
                 </div>
             </div>
@@ -250,5 +219,6 @@
     <script src="{{ asset('assets/frontend/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/assets/js/main.js') }}"></script>
+    @yield('js')
 </body>
 </html>

@@ -13,7 +13,7 @@ class HasilDiagnosaModel extends Model
 
     protected $table      = 'hasil_diagnosa';
     protected $primaryKey = 'id';
-    protected $fillable   = ['tanggal','id_penyakit','id_gejala','hasil_nilai','id_user'];
+    protected $fillable   = ['tanggal','id_nilai_cf','hasil_nilai','id_user'];
 
     public function getData($id = null)
     {
@@ -28,8 +28,7 @@ class HasilDiagnosaModel extends Model
     {
         $saveData = $this->firstOrNew(['id' =>  $id]);
         $saveData->tanggal     = $data['tanggal'];
-        $saveData->id_penyakit = $data['id_penyakit'];
-        $saveData->id_gejala   = $data['id_gejala'];
+        $saveData->id_nilai_cf = $data['id_nilai_cf'];
         $saveData->hasil_nilai = $data['hasil_nilai'];
         $saveData->id_user     = $data['id_user'];
         $saveData->save();
@@ -47,14 +46,9 @@ class HasilDiagnosaModel extends Model
         return $this->where(['tanggal' => date($tanggal), 'id_user' => $id_user])->get();
     }
 
-    public function gejala(): BelongsTo
+    public function nilai_cf(): BelongsTo
     {
-        return $this->BelongsTo(GejalaModel::class, 'id_gejala', 'id');
-    }
-
-    public function penyakit(): BelongsTo
-    {
-        return $this->BelongsTo(PenyakitModel::class, 'id_penyakit', 'id');
+        return $this->BelongsTo(BasisPengetahuanModel::class, 'id_nilai_cf', 'id');
     }
     
     public function user(): BelongsTo

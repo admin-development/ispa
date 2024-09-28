@@ -53,9 +53,9 @@ abstract class Controller
                     'tanggal'       => $value->tanggal,
                     'hasil_nilai'   => $maxHasil * 100 . '%',
                     'id_penyakit'   => $value->id_penyakit,
-                    'nama_penyakit' => $value->penyakit->nama_penyakit,
-                    'kode_penyakit' => $value->penyakit->kode_penyakit,
-                    'solusi'        => $value->penyakit->solusi,
+                    'nama_penyakit' => $value->nilai_cf->penyakit->nama_penyakit,
+                    'kode_penyakit' => $value->nilai_cf->penyakit->kode_penyakit,
+                    'solusi'        => $value->nilai_cf->penyakit->solusi,
                     'id_user'       => $value->id_user,
                     'nama'     => $value->user->nama,
                     'username'      => $value->user->username
@@ -95,9 +95,9 @@ abstract class Controller
                 'tanggal'       => $value->tanggal,
                 'hasil_nilai'   => $maxHasil * 100 . '%',
                 'id_penyakit'   => $value->id_penyakit,
-                'nama_penyakit' => $value->penyakit->nama_penyakit,
-                'kode_penyakit' => $value->penyakit->kode_penyakit,
-                'solusi'        => $value->penyakit->solusi,
+                'nama_penyakit' => $value->nilai_cf->penyakit->nama_penyakit,
+                'kode_penyakit' => $value->nilai_cf->penyakit->kode_penyakit,
+                'solusi'        => $value->nilai_cf->penyakit->solusi,
                 'id_user'       => $value->id_user,
                 'nama'     => $value->user->nama,
                 'username'      => $value->user->username
@@ -146,10 +146,10 @@ abstract class Controller
                     }
                     $newData = [
                         'tanggal'       => $value->tanggal,
-                        'nama_penyakit' => $value->penyakit->nama_penyakit,
+                        'nama_penyakit' => $value->nilai_cf->penyakit->nama_penyakit,
                         'hasil_nilai'   => $newHasil * 100 . '%',
                         'id_user'       => $value->id_user,
-                        'solusi'        => $value->penyakit->solusi
+                        'solusi'        => $value->nilai_cf->penyakit->solusi
                     ];
                     array_push($resultV, $newData);
                     $oldHasil = 0;

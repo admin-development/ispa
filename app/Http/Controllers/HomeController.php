@@ -35,20 +35,14 @@ class HomeController extends Controller
     {
         $data = $request->all();
 
-        if (!isset($data['id_gejala'])) {
-            $message = 'Pilih setidaknya satu gejala yang anda alami!';
-            return view('frontend.error', compact('message'));
-        }
-
         foreach ($data['id_gejala'] as $value) {
-            $dataGejala = $this->basis->getDatabyGejalaId($value);
-            if ($dataGejala) {
+            $nilaiCf = $this->basis->getDatabyGejalaId($value);
+            if ($nilaiCf) {
                 $user = $this->user->getDatabyUsername(\Session::get('username'));
                 $insertData = [
                     'tanggal'     => date(now()),
-                    'id_penyakit' => $dataGejala->id_penyakit,
-                    'id_gejala'   => $value,
-                    'hasil_nilai' => $dataGejala->mb * $dataGejala->md,
+                    'id_nilai_cf' => $nilaiCf->id,
+                    'hasil_nilai' => $nilaiCf->mb * $nilaiCf->md,
                     'id_user'     => $user->id
                 ];
                 $this->hasil->insertOrUpdate($insertData);
@@ -56,12 +50,6 @@ class HomeController extends Controller
         }
 
         return redirect()->to(route('diagnosa'));
-    }
-
-    public function artikel()
-    {
-        $data = $this->edukasi->getData();
-        return view('frontend.artikel', compact('data'));
     }
     
     public function artikel_detail($id)
