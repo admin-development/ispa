@@ -25,7 +25,11 @@ class isLogin
         }
         else if (!\Session::get('login')) {
             if (!in_array('login', $segment) && !in_array('beranda', $segment) && count($segment) != 0) {
-                return redirect()->to(route('login'))->withErrors('error', 'Silakan login terlebih dahulu');
+                $goTo = 'login';
+                if ($segment[0] === 'admin') {
+                    $goTo = 'admin.login';
+                }
+                return redirect()->to(route($goTo))->withErrors('error', 'Silakan login terlebih dahulu');
             }
         }
 
