@@ -51,6 +51,15 @@ class HomeController extends Controller
 
         return redirect()->to(route('diagnosa'));
     }
+
+    public function edukasi()
+    {
+        $model = new \App\Models\EdukasiModel();
+        $articles = $model->getData();
+        $delay = 0;
+        $i = 0;
+        return view('frontend.edukasi', compact('articles', 'delay', 'i'));
+    }
     
     public function artikel_detail($id)
     {

@@ -11,18 +11,11 @@ use App\Http\Controllers\EdukasiController;
 use App\Http\Controllers\HasilDiagnosaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Controller;
 
 Route::get('/admin', function () {
    return redirect()->to(route('admin.login')); 
 });
-Route::get('/', function () {
-    $model = new \App\Models\EdukasiModel();
-    $articles = $model->getData();
-    $delay = 0;
-    $i = 0;
-    return view('welcome', compact('articles', 'delay', 'i'));
-})->name('app');
+Route::view('/','welcome')->name('app');
 
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('admin')->group(function () {
@@ -57,7 +50,9 @@ Route::prefix('admin')->group(function () {
 Route::controller(HomeController::class)->group(function () {
     Route::get('/diagnosa', 'diagnosa')->name('diagnosa');
     Route::post('/diagnosa', 'store')->name('diagnosa');
-    Route::get('/edukasi/{id}', 'artikel_detail')->name('edukasi');
+    Route::get('/edukasi', 'edukasi')->name('edukasi');
+    Route::get('/edukasi/{id}', 'artikel_detail')->name('edukasi_detail');
+    Route::get('/about', 'about')->name('about');
     Route::get('/riwayat', 'riwayat')->name('riwayat');
     Route::post('/riwayat', 'riwayat_detail')->name('riwayat');
     Route::post('/riwayat/print', 'print')->name('riwayat.print');

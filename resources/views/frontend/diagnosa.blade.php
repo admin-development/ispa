@@ -2,16 +2,22 @@
 
 @section('css')
 <style>
-   
+    #diagnosa {
+        margin-top: 4rem;
+    }
 </style>
 @endsection
 
 @section("content")
-<main id="main">
-    <div class="container my-4">
-        <div class="section-title">
-            <h2 class="m-0">Diagnosa</h2>
-        </div>
+<section id="diagnosa" class="diagnosa section">
+    <div class="container section-title" data-aos="fade-up">
+        @if (isset($data['gejala']))
+            <h2>Hasil Diagnosa<br></h2>
+        @else
+            <h2>Diagnosa<br></h2>
+        @endif
+    </div>
+    <div class="container">
         <div class="row">
             <div class="col text-center">
                 @if (isset($data['gejala']))
@@ -82,12 +88,12 @@
                         </form>
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-secondary w-25" form="formGejala" onclick="submitDiagnosa();">Diagnosa</button>
+                <button type="submit" class="btn btn-primary w-25" form="formGejala" onclick="submitDiagnosa();">Diagnosa</button>
                 @endif
             </div>
         </div>
     </div>
-</main>
+</section>
 @endsection
 
 @section('js')

@@ -2,18 +2,21 @@
 
 @section('css')
 <style>
-   button {
+    button {
         border: 0;
+    }
+    #riwayat {
+        margin-top: 4rem;
     }
 </style>
 @endsection
 
 @section("content")
-<main id="main">
-    <div class="container my-4">
-        <div class="section-title">
-            <h2 class="m-0">Riwayat</h2>
-        </div>
+<section id="riwayat" class="riwayat section">
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Riwayat<br></h2>
+    </div>
+    <div class="container">
         <div class="row">
             <div class="col">
                 @if (isset($hd))
@@ -106,7 +109,7 @@
             </div>
         </div>
     </div>
-</main>
+</section>
 @endsection
 
 @section('js')

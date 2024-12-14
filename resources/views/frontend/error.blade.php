@@ -14,7 +14,7 @@
         </div>
         <div class="text-center">
             <h4 class="text-danger mb-4">{{ $message }}</h4>
-            <a href="{{ route('diagnosa') }}" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('diagnosa') }}" class="btn btn-primary">Kembali</a>
         </div>
     </div>
 </main>

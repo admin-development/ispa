@@ -2,39 +2,46 @@
 
 @section('css')
 <style>
-   p {
+    p {
         text-align: justify;
         text-justify: inter-word;
-   }
+    }
+    #about {
+        margin-top: 4rem;
+    }
 </style>
 @endsection
 
 @section("content")
-<main id="main">
-    <div class="container my-4">
-        <div class="section-title">
-            <h2 class="m-0">About</h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <h4 class="fw-bold text-primary">Sistem Pakar</h4>
-                <p>Sistem pakar ialah rangkaian perangkat lunak yang dirancang untuk meniru kemampuan seorang pakar manusia dalam suatu bidang spesifik, dibangun berdasarkan pengetahuan dan aturan yang telah diprogram, sistem ini mampu menganalisis masalah, membuat keputusan, dan memberikan solusi, mirip dengan pendekatan yang dilakukan oleh seorang pakar manusia, komponen utama sistem pakar melibatkan knowledge base yang berisi aturan-aturan, fakta-fakta, dan heuristik, serta mesin inferensi yang menggunakan informasi ini untuk mencapai kesimpulan atau memberikan rekomendasi.</p>
+<section id="about" class="about section">
+    <div class="container section-title" data-aos="fade-up">
+        <h2>About Us<br></h2>
+    </div>
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <h3>Pengertian Rancang Bangun sistem</h3>
+                <p>Rancang bangun sistem merupakan Rancang bangun sistem adalah suatu proses yang melibatkan perencanaan, pengembangan, dan penerapan sebuah sistem secara keseluruhan, mulai dari identifikasi kebutuhan hingga implementasi.</p>
             </div>
-            <div class="col-lg-6 col-md-6">
-                <h4 class="fw-bold text-primary">Metode Certainty Factor</h4>
-                <p>Metode certainty factor ialah salah satu konsep yang dimana dalam hal untuk akomodasi ketidak pastian terhadap suatu argumentasi ataupun pikiran dari seorang ahli.</p>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <h3>Pengertian Sistem Pakar</h3>
+                <p>Sistem pakar ialah sebuah program komputer yang dirancang untuk meniru kemampuan pengambilan keputusan seorang ahli dalam bidang tertentu.</p>
             </div>
-            <div class="col-lg-6 col-md-6">
-                <h4 class="fw-bold text-primary">Penyakit</h4>
-                <p>Penyakit ialah gangguan kesehatan yang mengganggu fungsi normal tubuh dan menyebabkan gejala yang tidak diinginkan. Penyakit bisa disebabkan oleh berbagai faktor, termasuk infeksi, keturunan, gaya hidup tidak sehat, atau lingkungan yang tidak sehat.</p>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <h3>Metode <i>Centainty Factor</i></h3>
+                <p>Metode certainty factor ialah salah satu konsep yang dimana dalam hal untuk akomodasi ketidak pastian terhadap suatu argumentasi ataupun pikiran dari seorang ahli, sebagai analoginya adalah ketika seorang ahli yang setiap saat melakukkan analisa informasi yang dengan ungkapan kepada ketidakpastian maka digunakan metode ini.</p>
             </div>
-            <div class="col-lg-6 col-md-6">
-                <h4 class="fw-bold text-primary">Website</h4>
-                <p>Website ialah suatu kumpulan tampilan web yang terintegrasi dan saling terhubung, membentuk akses portal dengan dashboard sebagai tampilan awal dan web page sebagai tampilan per halaman independent, pengguna dapat mengaksesnya melalui alamat atau link tertentu, Secara umum website mencakup seluruh tampilan web di bawah suatu domain, menyajikan informasi khusus atau umum sebagai referensi valid bagi pengguna.</p>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <h3>Pengertian ISPA</h3>
+                <p>Penyakit ISPA adalah kondisi medis yang disebabkan oleh infeksi pada saluran pernapasan, meliputi hidung, tenggorokan, bronkus, hingga paru-paru. ISPA dapat disebabkan oleh berbagai jenis mikroorganisme seperti virus, bakteri, atau jamur.</p>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <h3>Pengertian Website</h3>
+                <p>Website ialah suatu kumpulan tampilan web yang terintegrasi dan saling terhubung, membentuk akses portal dengan dashboard sebagai tampilan awal dan web page sebagai tampilan per halaman independent, pengguna dapat mengaksesnya melalui alamat atau link tertentu.</p>
             </div>
         </div>
     </div>
-</main>
+</section>
 @endsection
 
 @section('js')

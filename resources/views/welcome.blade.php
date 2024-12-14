@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'ISPA') }}</title>
-    <link href="{{ asset('assets/frontend/assets/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('assets/frontend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <title>Sistem Pakar Diagnosa Penyakit ISPA</title>
+    {{-- <link href="{{ asset('assets/frontend/assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('assets/frontend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> --}}
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
 </head>
 <body>
     <header id="header" class="header fixed-top">
-        <div class="topbar d-flex align-items-center">
+        {{-- <div class="topbar d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
                 <div class="contact-info d-flex align-items-center">
                     <i class="bi bi-envelope d-flex align-items-center"><a href="#">support@ispa.com</a></i>
@@ -40,20 +40,25 @@
                 </div>
                 @endif
             </div>
-        </div>
+        </div> --}}
         <div class="branding d-flex align-items-cente">
             <div class="container position-relative d-flex align-items-center justify-content-between">
                 <a href="{{ route('app') }}" class="logo d-flex align-items-center">
-                    <h1 class="sitename">ISPA</h1>
-                    <span>.</span>
+                    <h1 class="sitename">
+                        <img src="{{ asset("images/logo.png") }}" alt="">
+                    </h1>
                 </a>
                 <nav id="navmenu" class="navmenu">
                     <ul>
-                        <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #beranda @else {{ route('app') }} @endif" class="active">Beranda<br></a></li>
+                        <li><a href="{{ route('app') }}" class="active">Beranda<br></a></li>
+                        @if (session("login") === true)
                         <li><a href="{{ route('diagnosa') }}">Diagnosa</a></li>
-                        <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #edukasi @else {{ route('app') }} @endif">Edukasi</a></li>
+                        @endif
+                        <li><a href="{{ route('edukasi') }}">Edukasi</a></li>
+                        @if (session("login") === true)
                         <li><a href="{{ route('riwayat') }}">Riwayat</a></li>
-                        <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #about @else {{ route('app') }} @endif">About</a></li>
+                        @endif
+                        <li><a href="{{ route('about') }}">About</a></li>
                         @if (\Session::get('login'))
                         <li class="dropdown"><a href="#"><span>{{ \Session::get('nama') }}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
@@ -85,14 +90,15 @@
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row gy-5 justify-content-between">
                     <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                        <h2><span>Welcome to </span><span class="accent">ISPA</span></h2>
-                        <p>Selamat datang di website ISPA! Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik bagi Anda. Kesehatan Anda adalah prioritas kami!</p>
-                        <div class="d-flex">
+                        <h2><span>Welcome to </span><span class="accent">Sistem Pakar Diagnosa Penyakit ISPA</span></h2>
+                        <p>Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik bagi Anda. Kesehatan Anda adalah prioritas kami!</p>
+                        {{-- <div class="d-flex">
                             <a href="{{ route('diagnosa') }}" class="btn-get-started">Get Started</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="col-lg-5 order-1 order-lg-2">
-                        <img src="{{ asset('assets/frontend/assets/img/hero-img.svg') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('images/ispa.png') }}" class="img-fluid" alt="">
+                        {{-- <img src="{{ asset('assets/frontend/assets/img/hero-img.svg') }}" class="img-fluid" alt=""> --}}
                     </div>
                 </div>
             </div>
@@ -100,7 +106,95 @@
                 <div class="container position-relative mt-5"></div>
             </div>
         </section>
-        <section id="edukasi" class="recent-posts section">
+        <section id="ispa" class="ispa section pt-3">
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Penyakit ISPA</h2>
+            </div>
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col">
+                        <img src="{{ asset("images/1-croup.jpg") }}" alt="" class="img-fluid img-thumbnail w-100">
+                    </div>
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3>Croup</h3>
+                        <p>Croup adalah penyakit saluran pernapasan atas pada anak yang umumnya disebabkan oleh infeksi virus.</p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3>Sinusitis</h3>
+                        <p>Sinusitis akut adalah peradangan pada rongga sinus di hidung yang menyebabkan pembengkakan dan produksi lendir berlebih.</p>
+                    </div>
+                    <div class="col">
+                        <img src="{{ asset("images/2-sinusitis.jpg") }}" alt="" class="img-fluid img-thumbnail w-100">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <img src="{{ asset("images/3-batuk.jpg") }}" alt="" class="img-fluid img-thumbnail w-100">
+                    </div>
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3>Batuk Rejan</h3>
+                        <p>Batuk rejan atau pertusis adalah penyakit infeksi saluran pernapasan yang disebabkan oleh bakteri Bordetella pertussis.</p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3>Bronkitis</h3>
+                        <p>Bronkitis adalah peradangan atau iritasi pada saluran bronkus, yaitu pipa yang menghubungkan tenggorokan dengan paru-paru.</p>
+                    </div>
+                    <div class="col">
+                        <img src="{{ asset("images/4-bronkitis.jpg") }}" alt="" class="img-fluid img-thumbnail w-100">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <img src="{{ asset("images/5-pneumonia.png") }}" alt="" class="img-fluid img-thumbnail w-100">
+                    </div>
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3>Pneumonia</h3>
+                        <p>Pneumonia atau paru-paru basah adalah peradangan pada jaringan paru-paru yang disebabkan oleh infeksi mikroorganisme seperti bakteri, virus, jamur, dan parasit.</p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3>Epiglotitis</h3>
+                        <p>Epiglotitis adalah peradangan dan pembengkakan pada epiglotis, yaitu jaringan yang berfungsi sebagai katup untuk menutup saluran pernapasan saat menelan.</p>
+                    </div>
+                    <div class="col">
+                        <img src="{{ asset("images/6-epiglotitis.jpg") }}" alt="" class="img-fluid img-thumbnail w-100">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <img src="{{ asset("images/7-bronkospasme.jpg") }}" alt="" class="img-fluid img-thumbnail w-100">
+                    </div>
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3>Bronkospasme</h3>
+                        <p>Bronkospasme adalah kondisi ketika otot-otot yang melapisi bronkus (saluran udara paru-paru) menegang dan menyempit, sehingga menyebabkan kesulitan bernapas.</p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3>Slepp Apnea</h3>
+                        <p>Sleep apnea adalah gangguan tidur yang menyebabkan pernapasan berhenti atau menjadi sangat pendek saat tidur.</p>
+                    </div>
+                    <div class="col">
+                        <img src="{{ asset("images/8-sleep.jpg") }}" alt="" class="img-fluid img-thumbnail w-100">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <img src="{{ asset("images/9-stenosis.jpg") }}" alt="" class="img-fluid img-thumbnail w-100">
+                    </div>
+                    <div class="col d-flex flex-column justify-content-center">
+                        <h3>Stenosis Subglotis</h3>
+                        <p>Stenosis subglotis (SGS) adalah kondisi penyempitan saluran napas di bawah pita suara dan di atas trakea.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {{-- <section id="edukasi" class="recent-posts section">
             <div class="container section-title" data-aos="fade-up">
                 <h2>Edukasi</h2>
             </div>
@@ -159,7 +253,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         @else
         @yield('content')
         @endif
@@ -169,7 +263,9 @@
             <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-about">
                     <a href="{{ route('app') }}" class="logo d-flex align-items-center">
-                    <span class="sitename">ISPA</span>
+                    <span class="sitename">
+                        <img src="{{ asset("images/logo.png") }}" alt="">
+                    </span>
                     </a>
                     <p>Selamat datang di website ISPA! Kami berkomitmen untuk memberikan pelayanan kesehatan terbaik bagi Anda. Kesehatan Anda adalah prioritas kami!</p>
                     <p class="mb-0 pb-0">
@@ -184,17 +280,21 @@
                 <div class="col-lg-2 col-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                    <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #beranda @else {{ route('app') }} @endif">Beranda</a></li>
+                    <li><a href="{{ route('app') }}">Beranda</a></li>
+                    @if (session("login") === true)
                     <li><a href="{{ route('diagnosa') }}">Diagnosa</a></li>
-                    <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #edukasi @else {{ route('app') }} @endif">Edukasi</a></li>
+                    @endif
+                    <li><a href="{{ route('edukasi') }}">Edukasi</a></li>
+                    @if (session("login") === true)
                     <li><a href="{{ route('riwayat') }}">Riwayat</a></li>
-                    <li><a href="@if (\Request::segment(1) == 'beranda' || !\Request::segment(1)) #about @else {{ route('app') }} @endif">About</a></li>
+                    @endif
+                    <li><a href="{{ route('about') }}">About</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">ISPA</strong> <span>All Rights Reserved</span></p>
+            <p>©<span>Copyright</span><strong class="px-1 sitename">Klinik Pratama Yakrija Jakarta, 2024.</strong><span>All Rights Reserved</span></p>
             <div class="credits">
             <!-- All the links in the footer should remain intact. -->
             <!-- You can delete the links only if you've purchased the pro version. -->
