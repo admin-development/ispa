@@ -33,6 +33,7 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
+        $nextId = 0;
         $data = $request->all();
 
         foreach ($data['id_gejala'] as $value) {
@@ -41,11 +42,12 @@ class HomeController extends Controller
                 $user = $this->user->getDatabyUsername(\Session::get('username'));
                 $insertData = [
                     'tanggal'     => date(now()),
-                    'id_nilai_cf' => $nilaiCf->id,
+                    'id_nilai_cf' => $nextId == 18 ? $nextId : $nilaiCf->id,
                     'hasil_nilai' => $nilaiCf->mb * $nilaiCf->md,
                     'id_user'     => $user->id
                 ];
                 $this->hasil->insertOrUpdate($insertData);
+                if ($nilaiCf->id == 17) { $nextId = 18; }
             }
         }
 
