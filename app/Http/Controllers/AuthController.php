@@ -50,7 +50,7 @@ class AuthController extends Controller
                 ];
                 session($sessionData);
                 $goTo = 'app';
-                if ($segment == 'admin') {
+                if ($segment == 'admin' || session()->get('group') == 1) {
                     $goTo = 'dashboard';
                 }
                 return redirect()->to(route($goTo))->withErrors(['success' => "Selamat datang $user->nama"]);
@@ -59,6 +59,39 @@ class AuthController extends Controller
             }
         } else {
             return redirect()->to(route($goTo))->withErrors(['error' => 'User tidak terdaftar!']);
+        }
+    }
+
+    public function indexRegister()
+    {
+        return view('auth.register');
+    }
+    
+    public function register(Request $request)
+    {
+        if (!$request->validate([
+            'nama' => 'required',
+            'username' => 'unique:user'
+        ], [
+            'nama' => 'Nama user tidak boleh kosong',
+            'username' => 'Username yang digunakan sudah ada'
+        ])) {
+            return redirect()->to(route('register'))->withInput();
+        };
+        $data = $request->all();
+        $save = $this->user->insertOrUpdate($data);
+        if (!empty($save)) {
+            $sessionData = [
+                'nama'     => $save->nama,
+                'username' => $save->username,
+                'group'    => $save->id_group,
+                'color'    => dechex(rand(0x000000, 0xFFFFFF)),
+                'login'    => true
+            ];
+            session($sessionData);
+            return redirect()->to(route('app'));
+        } else {
+            return redirect()->to(route('register'))->withErrors(['msg' => 'Error', 'error' => 'Pendaftaran Gagal']);
         }
     }
 

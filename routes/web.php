@@ -15,8 +15,12 @@ use App\Http\Controllers\HomeController;
 Route::get('/admin', function () {
    return redirect()->to(route('admin.login')); 
 });
-Route::view('/','welcome')->name('app');
-
+Route::get('/', function () {
+    if (session('login') && session('group') == 1) {
+        return redirect()->to(route('dashboard'));
+    }
+    return redirect()->to(route('beranda'));
+})->name('app');
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/login', 'indexAdmin')->name('admin.login');
@@ -24,6 +28,8 @@ Route::controller(AuthController::class)->group(function () {
     });
     Route::get('/login', 'index')->name('login');
     Route::post('/login', 'login')->name('login');
+    Route::get('/register', 'indexRegister')->name('register');
+    Route::post('/register', 'register')->name('register');
     Route::post('/logout', 'logout')->name('logout');
 });
 

@@ -62,11 +62,11 @@
                         @if (\Session::get('login'))
                         <li class="dropdown"><a href="#"><span>{{ \Session::get('nama') }}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
-                                @if (\Session::get('group') == 1)
+                                {{-- @if (\Session::get('group') == 1)
                                 <li>
                                     <a href="{{ route('dashboard') }}">Dashboard</a>
                                 </li>
-                                @endif
+                                @endif --}}
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST" id="outForm">
                                         @csrf

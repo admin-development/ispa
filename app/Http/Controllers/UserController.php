@@ -20,9 +20,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         if (!$request->validate([
-            'nama' => 'required'
+            'nama' => 'required',
+            'username' => 'unique:user'
         ], [
-            'nama' => 'Nama user tidak boleh kosong'
+            'nama' => 'Nama user tidak boleh kosong',
+            'username' => 'Username yang digunakan sudah ada'
         ])) {
             return redirect()->to(route('pengguna.create'));
         };

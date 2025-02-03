@@ -86,8 +86,8 @@
                                 <img class="img-profile rounded-circle" src="https://ui-avatars.com/api/?name={{ session('nama') }}&background={{ session('color') }}">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
-                                <a class="dropdown-item" href="{{ route('app') }}"><i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>Beranda</a>
-                                <div class="dropdown-divider"></div>
+                                {{-- <a class="dropdown-item" href="{{ route('app') }}"><i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>Beranda</a>
+                                <div class="dropdown-divider"></div> --}}
                                 <form action="{{ route('logout') }}" method="POST" id="uForm">
                                     @csrf
                                     <a class="dropdown-item" href="#" onclick="uForm.submit();"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout</a>

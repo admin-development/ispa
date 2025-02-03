@@ -1,6 +1,6 @@
 source .env
 
-php artisan cache:clear
+# php artisan cache:clear
 
 if [[ $1 -eq "soft" ]]
 then

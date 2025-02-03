@@ -24,7 +24,7 @@
                     <thead class="text-center">
                         <tr>
                             <th width="5%">#</th>
-                            <th>Kode User</th>
+                            <th>Nama Lengkap</th>
                             <th>Username</th>
                             <th>Nomor Handphone</th>
                             <th>Aksi</th>

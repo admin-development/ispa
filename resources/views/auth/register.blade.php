@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistem Pakar Diagnosa Penyakit ISPA</title>
+    <title>Register | Sistem Pakar Diagnosa Penyakit ISPA</title>
     {{-- <link href="{{ asset('assets/frontend/assets/img/favicon.png') }}" rel="icon">
     <link href="{{ asset('assets/frontend/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> --}}
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -33,23 +33,40 @@
         <div class="card-body">
             <h6 class="text-center">Sistem Pakar Diagnosa Penyakit ISPA</h6>
             <h6 class="text-center">Klinik Pratama Yakrija Jakarta</h6>
-            <h2 class="text-center m-3">LOGIN</h2>
-            <form action="{{ route('login') }}" method="post">
+            <h2 class="text-center m-3">REGISTER</h2>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="m-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form action="{{ route('register') }}" method="post">
                 @csrf
                 <div class="form-group mb-3">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" class="form-control" name="nama" id="nama" required autofocus>
+                </div>
+                <div class="form-group mb-3">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" required autofocus>
+                    <input type="text" class="form-control" name="username" id="username" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password">
+                    <input type="password" class="form-control" name="password" id="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary form-control">Login</button>
+                <div class="form-group mb-3">
+                    <label for="no_hp">Nomor Ponsel</label>
+                    <input type="text" class="form-control" name="no_hp" id="no_hp" required>
+                </div>
+                <button type="submit" class="btn btn-primary form-control">Daftar</button>
             </form>
         </div>
         <div class="card-footer">
             <div class="text-center">
-                <a href="{{ route('register') }}">Belum Punya Akun?</a>
+                <a href="{{ route('login') }}">Sudah Punya Akun?</a>
             </div>
         </div>
     </div>
